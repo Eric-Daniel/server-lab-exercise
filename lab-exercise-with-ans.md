@@ -189,9 +189,22 @@ Restart the network service after configuration.
 Make sure the machines can communicate with each other, e.g. use ping command.
 
 3. Configure SSH server to listen to port 10022.
+```
+sudo sed -i 's/Port 22/Port 10022/g' /etc/ssh/sshd_config
+sudo service ssh restart
+```
+
+How to connect to a different port?
+```
+# Use ssh -p <port_number> <destination_ip>
+ssh -p 10022 10.0.0.10
+```
 
 Self-check:
 How to display the port that SSH server listen to?
+```
+sudo netstat -tulpn | grep ssh
+```
 
 4. Create a new user (user name = st_mgr) in both machine, assigned that user to st_group.
 5. Perform necessary configuration to allow st_mgr to login to server1 via SSH with key authentication.
