@@ -207,5 +207,30 @@ sudo netstat -tulpn | grep ssh
 ```
 
 4. Create a new user (user name = st_mgr) in both machine, assigned that user to st_group.
+```
+# Copy the following command on both server1 and server2
+sudo useradd -d /home/st_mgr -m st_mgr
+sudo addgroup st_group
+sudo usermod -g st_group st_mgr
+sudo passwd st_mgr
+# I'll use 123 as password for this example
+```
 5. Perform necessary configuration to allow st_mgr to login to server1 via SSH with key authentication.
+```
+# In server2
+su st_mgr
+# Type in 123
+
+ssh-keygen
+# Press enter for every prompt
+
+# Note that 10.0.0.10 is the IP of server1
+ssh-copy-id -i ~/.ssh/id_rsa.pub -p 10022 10.0.0.10 
+
+# Then type in the password which is 123
+
+# Now you can login to server1 using the following command
+ssh -p 10022 10.0.0.10
+```
+
 6. Configure SSH server to allow only user st_mgr and user group st_adm to login via SSH.
