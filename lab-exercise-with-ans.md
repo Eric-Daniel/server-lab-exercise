@@ -234,3 +234,14 @@ ssh -p 10022 10.0.0.10
 ```
 
 6. Configure SSH server to allow only user st_mgr and user group st_adm to login via SSH.
+```
+# Switch back to root user, in this case my root user is vagrant, and password is 'vagrant'
+su vagrant
+
+sudo bash -c 'echo "" >> /etc/ssh/sshd_config'
+sudo bash -c 'echo "AllowUsers st_mgr" >> /etc/ssh/sshd_config'
+sudo bash -c 'echo "AllowGroups st_adm" >> /etc/ssh/sshd_config'
+
+# Restart the ssh server
+sudo service ssh restart
+```
