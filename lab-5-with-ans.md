@@ -72,3 +72,5 @@ sudo service apache2 reload
 ```
 curl https://localhost:443 --insecure
 ```
+If the server work, after you run the command above, the shell will print the content of the `index.html` you created previously.  
+
